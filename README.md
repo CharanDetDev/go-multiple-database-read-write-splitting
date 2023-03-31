@@ -15,6 +15,7 @@
 > ## **Example**
 
 ```golang
+
     dsn_1 := mysqlDSN.Config{
 		User:      "username",
 		Passwd:    "password",
@@ -50,4 +51,5 @@
 			},
 		),
 	)
+    
 ```
