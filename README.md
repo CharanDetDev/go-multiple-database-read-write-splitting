@@ -1,15 +1,19 @@
-# The Go Language Programming : Multiple databases, read-write splitting FOR GORM 
-> ## **Package** 
-_Fiber, GORM, dbresolver, MySQL, Viper_
-  * github.com/gofiber/fiber/v2
-  * gorm.io/plugin/dbresolver
-  * gorm.io/gorm
-  * gorm.io/driver/mysql
-  * gorm.io/gorm/logger 
-  * github.com/go-sql-driver/mysql
-  * github.com/spf13/viper
+# The Go Language Programming : Multiple databases, read-write splitting FOR GORM
+
+> ## **Package**
+>
+> _Fiber, GORM, dbresolver, MySQL, Viper_
+
+- github.com/gofiber/fiber/v2
+- gorm.io/plugin/dbresolver
+- gorm.io/gorm
+- gorm.io/driver/mysql
+- gorm.io/gorm/logger
+- github.com/go-sql-driver/mysql
+- github.com/spf13/viper
 
 > ## **Example**
+
 ```golang
     dsn_1 := mysqlDSN.Config{
 		User:      "username",
@@ -38,7 +42,7 @@ _Fiber, GORM, dbresolver, MySQL, Viper_
 			Logger: &SqlLogger{},
 		},
 	)
-    
+
     gorm_db.Use(
 		dbresolver.Register(
 			dbresolver.Config{
