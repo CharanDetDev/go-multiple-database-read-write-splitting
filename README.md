@@ -11,7 +11,7 @@
 - gorm.io/gorm/logger
 - github.com/go-sql-driver/mysql
 - github.com/spf13/viper
-- database สามารถ git clone เพื่อลองใช้งานได้ที่ docker-mysql-database-1(Read/Write), docker-mysql-database-2(Read-only)
+- database สามารถ git clone เพื่อลองใช้งานได้ที่ https://github.com/CharanDetDev/docker-mysql-database-1 (Read/Write), https://github.com/CharanDetDev/docker-mysql-database-2 docker-mysql-database-2(Read-only)
 
 > ## **Example**
 
