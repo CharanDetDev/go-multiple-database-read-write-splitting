@@ -1,4 +1,4 @@
-# The Go Language Programming : Multiple databases, read-write splitting FOR GORM
+# The Go Language Programming : Multiple databases, read-write splitting for GORM
 
 > ## **Package**
 >
