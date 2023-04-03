@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func (service *personService) GetPersonWithPersonID(personId int, person *model.Person) error {
+func (service *personService) GetPersonWithPersonID(personId int, person *model.PersonModel) error {
 
 	err := service.PersonRepo.GetPersonWithPersonID(personId, person)
 	if err != nil {
@@ -16,6 +16,7 @@ func (service *personService) GetPersonWithPersonID(personId int, person *model.
 			logg.PrintloggerJsonMarshalIndentHasHeader("********** GET failed ********** | ", "Method GetPersonWithPersonID() ", fmt.Sprintf("%v | %v", err.Error(), logg.GetCallerPathNameFileNameLineNumber()))
 			return gorm.ErrRecordNotFound
 		}
+		logg.PrintloggerJsonMarshalIndentHasHeader("********** GET failed ********** | ", "Method GetPersonWithPersonID() ", fmt.Sprintf("%v | %v", err.Error(), logg.GetCallerPathNameFileNameLineNumber()))
 		return err
 	}
 

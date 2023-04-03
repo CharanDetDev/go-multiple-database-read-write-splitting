@@ -5,11 +5,13 @@ import (
 )
 
 type personService struct {
-	PersonRepo domain.PersonRepo
+	PersonRepo     domain.PersonRepo
+	AddaddressRepo domain.AddressRepo
 }
 
-func NewPersonService(personRepo domain.PersonRepo) domain.PersonService {
+func NewPersonService(personRepo domain.PersonRepo, addaddressRepo domain.AddressRepo) domain.PersonService {
 	return &personService{
-		PersonRepo: personRepo,
+		PersonRepo:     personRepo,
+		AddaddressRepo: addaddressRepo,
 	}
 }

@@ -21,8 +21,10 @@ type (
 
 func NewRoute() Route {
 
+	newAddressRepo := repository.NewAddressRepo(database.Conn)
+
 	newPersonRepo := repository.NewPersonRepo(database.Conn)
-	newPersonService := service.NewPersonService(newPersonRepo)
+	newPersonService := service.NewPersonService(newPersonRepo, newAddressRepo)
 	newPersonHandle := handler.NewPersonHandler(newPersonService)
 
 	return &route{

@@ -76,7 +76,11 @@ func initDatabaseGORM() (db *gorm.DB, err error) {
 			dbresolver.Config{
 				Replicas: []gorm.Dialector{mysql.Open(dsn_2.FormatDSN())},
 			},
-		),
+		).
+			SetConnMaxIdleTime(time.Hour).
+			SetConnMaxLifetime(24 * time.Hour).
+			SetMaxIdleConns(100).
+			SetMaxOpenConns(200),
 	)
 	if err != nil {
 		logg.Printlogger("\t\t ***** Connect failed (dsn_2) ***** :: | ", err.Error())

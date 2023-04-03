@@ -17,7 +17,7 @@ func (personHandler *personHandler) GetPersonWithPersonID(c *fiber.Ctx) error {
 		return caller.Response(c, fiber.StatusBadRequest, "Invalid param")
 	}
 
-	var resPerson model.Person
+	var resPerson model.PersonModel
 	err = personHandler.PersonService.GetPersonWithPersonID(personId, &resPerson)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
