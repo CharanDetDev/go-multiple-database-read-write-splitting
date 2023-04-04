@@ -10,9 +10,28 @@ import (
 func (service *personService) InsertPerson(newPerson *model.PersonRequest) error {
 
 	var addressResponse model.AddressResponseModel
-	err := service.AddaddressRepo.GetAddressByDistrictID(newPerson.DistrictID, newPerson.Language, &addressResponse)
+	districtID := fmt.Sprintf("%v", newPerson.DistrictID)
+	err := service.AddaddressRepo.GetAddressByDistrictID(districtID, newPerson.Language, &addressResponse)
 	if err != nil {
-		logg.PrintloggerJsonMarshalIndentHasHeader("********** GET Address failed ********** | ", "Insert failed, Method InsertPerson()", fmt.Sprintf("%v | %v", err.Error(), logg.GetCallerPathNameFileNameLineNumber()))
+		logg.PrintloggerJsonMarshalIndentHasHeader("********** GET Address failed ********** | ", "Insert failed, Method InsertPerson() at GetAddressByDistrictID() | ", fmt.Sprintf("%v | %v", err.Error(), logg.GetCallerPathNameFileNameLineNumber()))
+		return fmt.Errorf("gorm get address failed")
+	}
+
+	err = service.AddaddressRepo.GetAddressByAmpureID(addressResponse.AmphureID, newPerson.Language, &addressResponse)
+	if err != nil {
+		logg.PrintloggerJsonMarshalIndentHasHeader("********** GET Address failed ********** | ", "Insert failed, Method InsertPerson() at GetAddressByAmpureID() | ", fmt.Sprintf("%v | %v", err.Error(), logg.GetCallerPathNameFileNameLineNumber()))
+		return fmt.Errorf("gorm get address failed")
+	}
+
+	err = service.AddaddressRepo.GetAddressByProvinceID(addressResponse.ProvinceID, newPerson.Language, &addressResponse)
+	if err != nil {
+		logg.PrintloggerJsonMarshalIndentHasHeader("********** GET Address failed ********** | ", "Insert failed, Method InsertPerson() at GetAddressByProvinceID() | ", fmt.Sprintf("%v | %v", err.Error(), logg.GetCallerPathNameFileNameLineNumber()))
+		return fmt.Errorf("gorm get address failed")
+	}
+
+	err = service.AddaddressRepo.GetAddressByGography(addressResponse.GeographieID, &addressResponse)
+	if err != nil {
+		logg.PrintloggerJsonMarshalIndentHasHeader("********** GET Address failed ********** | ", "Insert failed, Method InsertPerson() at GetAddressByGography() | ", fmt.Sprintf("%v | %v", err.Error(), logg.GetCallerPathNameFileNameLineNumber()))
 		return fmt.Errorf("gorm get address failed")
 	}
 
@@ -30,6 +49,7 @@ func (service *personService) InsertPerson(newPerson *model.PersonRequest) error
 		GeographieID:   addressResponse.GeographieID,
 		GeographieName: addressResponse.GeographieName,
 	}
+
 	err = service.PersonRepo.InsertPerson(&newPersonTemp)
 	if err != nil {
 		logg.PrintloggerJsonMarshalIndentHasHeader("********** INSERT failed ********** | ", "Insert failed ", fmt.Sprintf("%v | %v", err.Error(), logg.GetCallerPathNameFileNameLineNumber()))
@@ -37,5 +57,4 @@ func (service *personService) InsertPerson(newPerson *model.PersonRequest) error
 	}
 
 	return nil
-
 }

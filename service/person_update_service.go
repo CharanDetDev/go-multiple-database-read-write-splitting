@@ -10,7 +10,8 @@ import (
 func (service *personService) UpdatePerson(newPerson *model.PersonRequest) error {
 
 	var addressResponse model.AddressResponseModel
-	err := service.AddaddressRepo.GetAddressByDistrictID(newPerson.DistrictID, newPerson.Language, &addressResponse)
+	districtID := fmt.Sprintf("%v", newPerson.DistrictID)
+	err := service.AddaddressRepo.GetAddressByDistrictID(districtID, newPerson.Language, &addressResponse)
 	if err != nil {
 		logg.PrintloggerJsonMarshalIndentHasHeader("********** GET Address failed ********** | ", "Insert failed, Method InsertPerson()", fmt.Sprintf("%v | %v", err.Error(), logg.GetCallerPathNameFileNameLineNumber()))
 		return fmt.Errorf("gorm get address failed")
